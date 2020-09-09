@@ -6,18 +6,28 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        navController = findNavController(R.id.nav_host_fragment)
+
+        fab.setOnClickListener {
+            navController.navigate(
+                R.id.action_remindersFragment_to_addReminderFragment
+            )
         }
+        fabToggler()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -34,6 +44,17 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
-
     }
+
+    private fun fabToggler() {
+        navController.addOnDestinationChangedListener { _,
+                                                        destination, _ ->
+            if (destination.id in arrayOf(R.id.addReminderFragment)) {
+                fab.hide()
+            } else {
+                fab.show()
+            }
+        }
+    }
+
 }
