@@ -12,6 +12,6 @@ data class Reminder(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Long?
+    var id: Long? = null
 
 )
