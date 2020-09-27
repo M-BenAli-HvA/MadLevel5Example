@@ -1,4 +1,4 @@
-package com.example.madlevel5example
+package com.example.madlevel5example.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.example.madlevel5example.R
 import kotlinx.android.synthetic.main.fragment_add_reminder.*
 import kotlinx.android.synthetic.main.fragment_add_reminder.view.*
 
@@ -36,11 +37,13 @@ class AddReminderFragment : Fragment() {
         val reminderText = etReminderName.text.toString()
 
         if(reminderText.isNotBlank()){
-            setFragmentResult(REQ_REMINDER_KEY,
+            setFragmentResult(
+                REQ_REMINDER_KEY,
             bundleOf(Pair(BUNDLE_REMINDER_KEY, reminderText)))
             findNavController().popBackStack()
         } else {
-            Toast.makeText(activity, R.string.not_valid_reminder, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,
+                R.string.not_valid_reminder, Toast.LENGTH_SHORT).show()
         }
 
     }

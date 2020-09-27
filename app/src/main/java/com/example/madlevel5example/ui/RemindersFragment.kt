@@ -1,4 +1,4 @@
-package com.example.madlevel5example
+package com.example.madlevel5example.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel2example.ReminderAdapter
+import com.example.madlevel5example.R
+import com.example.madlevel5example.models.Reminder
+import com.example.madlevel5example.repository.ReminderRepository
 import kotlinx.android.synthetic.main.fragment_reminders.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,7 +42,8 @@ class RemindersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        reminderRoomRepository = ReminderRepository(this.requireContext())
+        reminderRoomRepository =
+            ReminderRepository(this.requireContext())
         getRemindersFromDatabase()
     }
 
