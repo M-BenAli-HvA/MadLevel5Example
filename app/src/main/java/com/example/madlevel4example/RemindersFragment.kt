@@ -64,7 +64,10 @@ class RemindersFragment : Fragment() {
             bundle.getString(BUNDLE_REMINDER_KEY)?.let {
                 val reminder = Reminder(it)
                 CoroutineScope(Dispatchers.Main).launch {
-                    reminderRoomRepository.insertReminder(reminder)
+                    withContext(Dispatchers.IO) {
+                        reminderRoomRepository.insertReminder(reminder)
+                        Log.e("ReminderFragment", "Inserting a reminder")
+                    }
                 }
                 getRemindersFromDatabase()
             } ?: Log.e(
@@ -110,9 +113,9 @@ class RemindersFragment : Fragment() {
                 withContext(Dispatchers.IO) {
                     reminderRoomRepository.getAllReminders()
                 }
+            this@RemindersFragment.reminders.clear()
+            this@RemindersFragment.reminders.addAll(reminders)
+            reminderAdapter.notifyDataSetChanged()
         }
-        this@RemindersFragment.reminders.clear()
-        this@RemindersFragment.reminders.addAll(reminders)
-        reminderAdapter.notifyDataSetChanged()
     }
 }
