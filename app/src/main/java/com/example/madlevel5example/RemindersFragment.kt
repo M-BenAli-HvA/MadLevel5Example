@@ -1,4 +1,4 @@
-package com.example.madlevel4example
+package com.example.madlevel5example
 
 import android.os.Bundle
 import android.util.Log
@@ -60,7 +60,7 @@ class RemindersFragment : Fragment() {
 
     //    Observe the data that is passed from the addReminderFragment
     private fun observeAddReminderResult() {
-        setFragmentResultListener(REQ_REMINDER_KEY) { key, bundle ->
+        setFragmentResultListener(REQ_REMINDER_KEY) { _, bundle ->
             bundle.getString(BUNDLE_REMINDER_KEY)?.let {
                 val reminder = Reminder(it)
                 CoroutineScope(Dispatchers.Main).launch {
